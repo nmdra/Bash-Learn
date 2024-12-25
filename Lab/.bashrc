@@ -37,9 +37,6 @@ shopt -s checkwinsize
 shopt -s histappend
 PROMPT_COMMAND='history -a'
 
-# Allow ctrl-S for history navigation (with ctrl-R)
-stty -ixon
-
 # Ignore case on auto-completion
 # Note: bind used instead of sticking these in .inputrc
 if [[ $iatest > 0 ]]; then bind "set completion-ignore-case on"; fi
@@ -91,22 +88,11 @@ function __setprompt {
   local LAST_COMMAND=$? # Must come first!
 
   # Define colors
-  local LIGHTGRAY="\033[0;37m"
-  local WHITE="\033[1;37m"
-  local BLACK="\033[0;30m"
   local DARKGRAY="\033[1;30m"
   local RED="\033[0;31m"
   local LIGHTRED="\033[1;31m"
   local GREEN="\033[0;32m"
-  local LIGHTGREEN="\033[1;32m"
   local BROWN="\033[0;33m"
-  local YELLOW="\033[1;33m"
-  local BLUE="\033[0;34m"
-  local LIGHTBLUE="\033[1;34m"
-  local MAGENTA="\033[0;35m"
-  local LIGHTMAGENTA="\033[1;35m"
-  local CYAN="\033[0;36m"
-  local LIGHTCYAN="\033[1;36m"
   local NOCOLOR="\033[0m"
 
   # Show error exit code if there is one
@@ -151,38 +137,17 @@ function __setprompt {
     PS1=""
   fi
 
-  # Date
-  PS1+="\[${DARKGRAY}\](\[${CYAN}\]\$(date +%a) $(date +%b-'%-m')" # Date
-  PS1+="${BLUE} $(date +'%-I':%M:%S%P)\[${DARKGRAY}\])-"           # Time
-
-  # CPU
-  PS1+="(\[${MAGENTA}\]CPU $(cpu)%"
-
-  # Jobs
-  PS1+="\[${DARKGRAY}\]:\[${MAGENTA}\]\j"
-
-  # Network Connections (for a server - comment out for non-server)
-  PS1+="\[${DARKGRAY}\]:\[${MAGENTA}\]Net $(awk 'END {print NR}' /proc/net/tcp)"
-
-  PS1+="\[${DARKGRAY}\])-"
-
   # User and server
   local SSH_IP=$(echo $SSH_CLIENT | awk '{ print $1 }')
   local SSH2_IP=$(echo $SSH2_CLIENT | awk '{ print $1 }')
   if [ $SSH2_IP ] || [ $SSH_IP ]; then
-    PS1+="(\[${RED}\]\u@\h"
+    PS1+="\[${RED}\]\u@\h"
   else
-    PS1+="(\[${RED}\]\u"
+    PS1+="\[${RED}\]\u"
   fi
 
   # Current directory
-  PS1+="\[${DARKGRAY}\]:\[${BROWN}\]\w\[${DARKGRAY}\])-"
-
-  # Total size of files in current directory
-  PS1+="(\[${GREEN}\]$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')\[${DARKGRAY}\]:"
-
-  # Number of files
-  PS1+="\[${GREEN}\]\$(/bin/ls -A -1 | /usr/bin/wc -l)\[${DARKGRAY}\])"
+  PS1+="\[${DARKGRAY}\]:\[${BROWN}\]\w\[${GREEN}\]❯"
 
   # Skip to the next line
   PS1+="\n"
