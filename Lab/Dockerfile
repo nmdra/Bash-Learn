@@ -19,8 +19,8 @@ ENV USER_NAME=tux \
 # Add metadata labels
 LABEL maintainer="NIMENDRA" \
       version="1.0.0" \
-      repository="https://github.com/nmdra/Bash-Learn"
-      description="Custom Ubuntu-based Docker image with additional tools and a non-root user." \
+      repository="https://github.com/nmdra/Bash-Learn" \
+      description="Custom Ubuntu-based Docker image with additional tools and a non-root user."
 
 # Update the package list and install required packages
 RUN apt-get update && \
