@@ -16,6 +16,28 @@ elif [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
+status() {
+	{ echo -e "\nuptime:"
+		uptime
+		echo -e "\ndisk space:"
+		df -h 2> /dev/null
+		echo -e "\ninodes:"
+		df -i 2> /dev/null
+		echo -e "\nblock devices:"
+		blkid
+		echo -e "\nmemory:"
+		free -m
+		if [[ -r /var/log/syslog ]]; then
+			echo -e "\nsyslog:"
+			tail /var/log/syslog
+		fi
+		if [[ -r /var/log/messages ]]; then
+			echo -e "\nmessages:"
+			tail /var/log/messages
+		fi
+	} | less
+}
+
 #######################################################
 # EXPORTS
 #######################################################
