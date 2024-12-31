@@ -59,3 +59,50 @@ var="${1:-defaultValue}"  # This will use 'defaultValue' if $1 is empty or unset
 echo "Value of var: $var"
 
 ```
+
+## Remove Prefix and Suffix
+
+```bash
+some_script_name="/usr/bin/my_script.sh"
+echo "${some_script_name##*/}
+```
+
+```bash
+some_script_name="/usr/bin/my_script.sh"
+echo "${some_script_name%/*}"
+```
+
+## Select variable change
+
+```bash
+name="John Doe"
+echo "Hello, ${name:0:4}"
+```
+
+## Substring matching
+
+```bash
+path="/home/user/file.txt"
+echo "${path/file/data}"
+```
+
+## Character Count
+
+```bash
+name="Joen Doe"
+echo "${#name}"
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
