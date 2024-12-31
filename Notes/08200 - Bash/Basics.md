@@ -16,7 +16,10 @@ less tux.txt
 ```bash
 file tux.tar
 ```
+## Constant
 
-
+```bash
+readonly CONSTVAR=value
+```
 
 
