@@ -13,7 +13,6 @@ subject: "[[08200 - Bash]]"
 | `"$@"`    | All arguments passed to the script, treated as separate quoted strings (maintains argument boundaries).|
 
 ---
-
 ## **Exit Status and Process Information**
 | Variable  | Description                                                                                           |
 |-----------|-------------------------------------------------------------------------------------------------------|
@@ -22,7 +21,6 @@ subject: "[[08200 - Bash]]"
 | `$!`      | The PID of the last background command.                                                               |
 
 ---
-
 ### **Special Characters and Delimiters**
 | Variable  | Description                                                                                           |
 |-----------|-------------------------------------------------------------------------------------------------------|
@@ -48,7 +46,6 @@ Number of arguments passed: 2
 ```
 
 ---
-
 #### **2. `$0` (Script Name)**
 ```bash
 #!/bin/bash
@@ -64,7 +61,6 @@ This script is called: ./script.sh
 ```
 
 ---
-
 #### **3. `$*` vs `$@`**
 **Script**:
 ```bash
@@ -86,7 +82,6 @@ Using $@: arg1 arg2 with space
 - `$@` treats them as separate quoted strings: `"arg1" "arg2 with space"`.
 
 ---
-
 #### **4. `$?` (Exit Status)**
 ```bash
 #!/bin/bash
@@ -105,7 +100,6 @@ Exit status: 2
 - `$?` reflects the error code of the last command (`ls` failed with status `2`).
 
 ---
-
 #### **5. `$$` (Process ID of the Script)**
 ```bash
 #!/bin/bash
@@ -121,7 +115,6 @@ Script PID: 12345
 ```
 
 ---
-
 #### **6. `$!` (PID of Last Background Command)**
 ```bash
 #!/bin/bash
@@ -136,3 +129,26 @@ Output:
 ```
 Background PID: 12346
 ```
+
+## `$0` variables
+
+```bash
+# Script: script_name.sh
+echo "The script name is: $0"
+```
+
+```bash
+# Script: script_dir.sh
+script_dir=$(dirname "$(realpath "$0")")
+echo "The script is located in: $script_dir"
+```
+
+
+
+
+
+
+
+
+
+
